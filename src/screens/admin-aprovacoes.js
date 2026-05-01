@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabase.js'
 import { navegar, toast } from '../main.js'
 
 export async function render(container) {
+  container.innerHTML = `
     <div style="height:100dvh; display:flex; background:#F8F9FD; font-family:'Inter', sans-serif; color:#1E293B;">
       
       <!-- Sidebar -->
