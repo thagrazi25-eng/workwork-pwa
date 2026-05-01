@@ -1,31 +1,30 @@
 // =======================================================
-// Tela: Splash / Onboarding (Igual ao Protótipo Original)
+// Tela: Splash / Onboarding — Idêntico ao Protótipo
 // =======================================================
 import { navegar } from '../main.js'
 
 export function render(container, params = {}) {
-  // Se voltou aqui após cadastro, mostra mensagem de aguardo
+  // Tela de "Documentos em Análise" — pós cadastro
   if (params.aguardandoAprovacao) {
     container.innerHTML = `
       <div style="
-        display: flex; flex-direction: column; align-items: center;
-        justify-content: center; height: 100dvh; padding: 40px;
-        background: #F4F5F7; text-align: center; gap: 20px;
-        font-family: 'Inter', sans-serif;
+        display:flex; flex-direction:column; align-items:center;
+        justify-content:center; height:100%; padding:40px;
+        background:#F4F5F7; text-align:center; gap:20px;
+        font-family:'Inter', sans-serif;
       ">
-        <div style="font-size: 56px;">⏳</div>
-        <h2 style="font-size: 24px; font-weight: 800; color: #1E293B;">
-          Cadastro em análise
-        </h2>
-        <p style="color: #64748B; font-size: 15px; max-width: 280px; line-height: 1.6;">
-          Nossa equipe está verificando seus dados. Você será notificado assim que seu acesso for liberado.
+        <div style="font-size:64px; margin-bottom:4px;">⏳</div>
+        <h2 style="font-size:24px; font-weight:800; color:#111827;">Documentos em Análise</h2>
+        <p style="color:#64748B; font-size:15px; max-width:280px; line-height:1.6;">
+          Recebemos seus dados e documentos! Nossa equipe está validando seu perfil.<br><br>
+          Esse processo leva até <strong>24 horas</strong>. Assim que for aprovado, seu aplicativo será liberado.
         </p>
         <button id="btnSair" style="
-          margin-top: 16px; padding: 14px 32px;
-          background: none; border: 1.5px solid #D1D5DB;
-          border-radius: 12px; font-size: 15px; font-weight: 600;
-          color: #64748B; cursor: pointer;
-        ">Sair</button>
+          margin-top:16px; padding:14px 32px;
+          background:none; border:1.5px solid #D1D5DB;
+          border-radius:12px; font-size:15px; font-weight:600;
+          color:#64748B; cursor:pointer;
+        ">Sair da conta</button>
       </div>
     `
     document.getElementById('btnSair').onclick = async () => {
@@ -36,153 +35,181 @@ export function render(container, params = {}) {
     return
   }
 
-  // Onboarding normal — Baseado no protótipo original
+  // Tela de Escolha de Perfil
+  if (params.escolhaPerfil) {
+    renderEscolhaPerfil(container)
+    return
+  }
+
+  // Onboarding normal — 3 slides como no protótipo
   container.innerHTML = `
     <div style="
-      width: 100%; height: 100dvh;
-      background: #4F46E5;
-      display: flex; flex-direction: column;
-      overflow: hidden; position: relative;
-      font-family: 'Inter', sans-serif;
+      width:100%; height:100%;
+      background:#F4F5F7;
+      display:flex; flex-direction:column;
+      overflow:hidden; position:relative;
+      font-family:'Inter', sans-serif;
     ">
       <!-- Slides -->
-      <div style="flex:1; overflow: hidden; position: relative; margin-top: 60px;">
+      <div style="flex:1; overflow:hidden; position:relative; margin-top:64px;">
         <div id="splashSlides" style="
-          display: flex; width: 300%; height: 100%;
-          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          display:flex; width:300%; height:100%;
+          transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         ">
           <!-- Slide 1: Logo -->
-          <div class="slide-container">
-            <div class="logo-box">WW</div>
-            <h2 class="slide-title">WorkWork</h2>
-            <p class="slide-desc">Conectando quem faz a quem precisa</p>
+          <div class="splash-slide">
+            <div style="
+              width:120px; height:120px; background:#4F46E5; border-radius:28px;
+              display:flex; align-items:center; justify-content:center;
+              margin:0 auto 32px;
+              box-shadow:0 12px 30px rgba(79,70,229,0.25);
+            ">
+              <span style="color:white; font-size:56px; font-weight:800; letter-spacing:-2px;">WW</span>
+            </div>
+            <div style="font-size:32px; font-weight:800; color:#4F46E5; letter-spacing:-1px; margin-bottom:12px;">WorkWork</div>
+            <p style="font-size:16px; color:#4B5563; line-height:1.5; text-align:center;">Conectando quem faz a quem precisa</p>
           </div>
 
           <!-- Slide 2: Profissionais -->
-          <div class="slide-container">
-            <div class="slide-emoji">👷‍♂️</div>
-            <h2 class="slide-title">Para Profissionais</h2>
-            <p class="slide-desc">Ofereça seus serviços e encontre novos clientes na sua região com segurança.</p>
+          <div class="splash-slide">
+            <div style="font-size:80px; margin-bottom:24px;">👷‍♂️</div>
+            <div style="font-size:24px; font-weight:800; color:#4F46E5; letter-spacing:-0.5px; margin-bottom:12px; text-align:center;">Para Profissionais</div>
+            <p style="font-size:16px; color:#4B5563; line-height:1.5; text-align:center;">Ofereça seus serviços e encontre novos clientes na sua região com segurança.</p>
           </div>
 
           <!-- Slide 3: Empresas -->
-          <div class="slide-container">
-            <div class="slide-emoji">🏢</div>
-            <h2 class="slide-title">Para Empresas</h2>
-            <p class="slide-desc">Contrate os melhores talentos avaliados para sua obra ou projeto.</p>
+          <div class="splash-slide">
+            <div style="font-size:80px; margin-bottom:24px;">🏢</div>
+            <div style="font-size:24px; font-weight:800; color:#4F46E5; letter-spacing:-0.5px; margin-bottom:12px; text-align:center;">Para Empresas</div>
+            <p style="font-size:16px; color:#4B5563; line-height:1.5; text-align:center;">Contrate os melhores talentos avaliados para sua obra ou projeto.</p>
           </div>
         </div>
       </div>
 
       <!-- Dots -->
-      <div style="display: flex; justify-content: center; gap: 8px; padding: 20px 0; margin-bottom: auto;">
-        <div class="dot active-dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+      <div style="display:flex; justify-content:center; gap:8px; margin:16px 0;">
+        <div class="splash-dot active-splash-dot" data-i="0"></div>
+        <div class="splash-dot" data-i="1"></div>
+        <div class="splash-dot" data-i="2"></div>
       </div>
 
-      <!-- Botões de Navegação -->
-      <div id="splashNav" style="padding: 0 32px 40px; display: flex; justify-content: space-between; align-items: center;">
-        <button id="btnPular" style="background:none; border:none; color:rgba(255,255,255,0.7); font-size:15px; font-weight:600; cursor:pointer;">Pular</button>
+      <!-- Botões de Navegação (slides 1 e 2) -->
+      <div id="splashNavBtns" style="position:absolute; bottom:40px; left:24px; right:24px; display:flex; flex-direction:column; gap:16px;">
         <button id="btnProx" style="
-          background: white; color: #4F46E5; border: none;
-          padding: 14px 28px; border-radius: 50px;
-          font-weight: 700; font-size: 15px; cursor: pointer;
-        ">Próximo →</button>
+          background:#4F46E5; color:white; border:none;
+          padding:16px; border-radius:12px;
+          font-weight:600; font-size:16px; cursor:pointer;
+          font-family:'Inter',sans-serif; width:100%;
+        ">Próximo</button>
+        <a href="#" id="btnPular" style="
+          text-align:center; color:#4B5563; font-size:14px;
+          font-weight:500; text-decoration:none; display:block;
+        ">Pular apresentação</a>
       </div>
 
-      <!-- Botões de Ação Final -->
-      <div id="splashAcao" style="padding: 0 32px 40px; gap: 12px; display: none; flex-direction: column;">
+      <!-- Botões de Ação Final (slide 3) -->
+      <div id="splashActionBtns" style="position:absolute; bottom:40px; left:24px; right:24px; display:none; flex-direction:column; gap:16px;">
         <button id="btnCadastrar" style="
-          background: white; color: #4F46E5; border: none;
-          padding: 18px; border-radius: 14px;
-          font-weight: 700; font-size: 16px; cursor: pointer;
+          background:#4F46E5; color:white; border:none;
+          padding:16px; border-radius:12px;
+          font-weight:600; font-size:16px; cursor:pointer;
+          font-family:'Inter',sans-serif; width:100%;
         ">Criar minha conta</button>
-        <button id="btnEntrar" style="
-          background: none; color: white; border: none;
-          padding: 10px; font-weight: 600; font-size: 15px; cursor: pointer;
-          opacity: 0.9;
-        ">já tenho conta — entrar</button>
+        <a href="#" id="btnEntrar" style="
+          text-align:center; color:#3730A3; font-size:14px;
+          font-weight:600; text-decoration:none; display:block;
+        ">já tenho conta — entrar</a>
       </div>
     </div>
 
     <style>
-      .slide-container {
-        width: 33.333%; flex-shrink: 0;
-        display: flex; flex-direction: column;
-        align-items: center; justify-content: center;
-        padding: 0 40px; text-align: center;
+      .splash-slide {
+        width:33.333%; flex-shrink:0;
+        display:flex; flex-direction:column;
+        align-items:center; justify-content:center;
+        padding:24px; box-sizing:border-box; overflow:hidden;
       }
-      .logo-box {
-        width: 120px; height: 120px; background: #4F46E5; border-radius: 28px;
-        display: flex; align-items: center; justify-content: center;
-        color: white; font-size: 56px; font-weight: 800; letter-spacing: -2px;
-        margin-bottom: 32px; box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-        border: 2px solid rgba(255,255,255,0.2);
+      .splash-dot {
+        width:8px; height:8px; border-radius:4px;
+        background:#D1D5DB; cursor:pointer; transition:all 0.3s;
       }
-      .slide-emoji { font-size: 80px; margin-bottom: 24px; }
-      .slide-title { font-size: 32px; font-weight: 800; color: white; margin-bottom: 12px; letter-spacing: -1px; }
-      .slide-desc { color: rgba(255,255,255,0.85); font-size: 16px; line-height: 1.5; max-width: 280px; }
-      
-      .dot {
-        width: 8px; height: 8px; border-radius: 50%;
-        background: rgba(255,255,255,0.3); transition: all 0.3s;
-      }
-      .active-dot {
-        width: 24px; border-radius: 4px;
-        background: white;
+      .active-splash-dot {
+        width:24px; border-radius:4px; background:#4F46E5;
       }
     </style>
   `
 
   let current = 0
   const slides = document.getElementById('splashSlides')
-  const dots   = document.querySelectorAll('.dot')
-  const nav    = document.getElementById('splashNav')
-  const acao   = document.getElementById('splashAcao')
+  const dots   = document.querySelectorAll('.splash-dot')
+  const navBtns   = document.getElementById('splashNavBtns')
+  const actionBtns = document.getElementById('splashActionBtns')
 
   function goTo(i) {
     current = i
     slides.style.transform = `translateX(-${i * 33.333}%)`
     dots.forEach((d, idx) => {
-      d.className = idx === i ? 'dot active-dot' : 'dot'
+      d.className = idx === i ? 'splash-dot active-splash-dot' : 'splash-dot'
     })
     if (i === 2) {
-      nav.style.display = 'none'
-      acao.style.display = 'flex'
+      navBtns.style.display = 'none'
+      actionBtns.style.display = 'flex'
     } else {
-      nav.style.display = 'flex'
-      acao.style.display = 'none'
+      navBtns.style.display = 'flex'
+      actionBtns.style.display = 'none'
     }
   }
 
+  dots.forEach(d => d.onclick = () => goTo(parseInt(d.dataset.i)))
   document.getElementById('btnProx').onclick  = () => goTo(Math.min(current + 1, 2))
-  document.getElementById('btnPular').onclick  = () => goTo(2)
-  document.getElementById('btnCadastrar').onclick = () => navegar('splash') // Abre escolha de perfil
-  
-  // No protótipo original, o fluxo de cadastro começa com a escolha de perfil
-  document.getElementById('btnCadastrar').onclick = () => {
-    // Simula a Tela 1: Escolha de Perfil
-    container.innerHTML = `
-      <div style="height:100dvh; background:#4F46E5; display:flex; flex-direction:column; padding:40px 32px; font-family:'Inter', sans-serif;">
-        <h2 style="font-size:28px; font-weight:800; color:white; margin: auto 0 40px; line-height:1.3;">Como você quer usar o WorkWork?</h2>
-        <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:40px;">
-          <button id="souProf" style="background:white; color:#4F46E5; border:none; padding:20px; border-radius:16px; text-align:left; cursor:pointer;">
-            <div style="font-weight:800; font-size:18px;">Sou profissional</div>
-            <div style="font-size:13px; opacity:0.8;">quero oferecer meus serviços</div>
-          </button>
-          <button id="souEmp" style="background:rgba(255,255,255,0.15); color:white; border:1.5px solid rgba(255,255,255,0.3); padding:20px; border-radius:16px; text-align:left; cursor:pointer;">
-            <div style="font-weight:800; font-size:18px;">Sou empresa</div>
-            <div style="font-size:13px; opacity:0.8;">quero contratar profissionais</div>
-          </button>
-        </div>
-        <button id="btnVoltarSplash" style="background:none; border:none; color:white; font-size:14px; font-weight:600; cursor:pointer;">← Voltar</button>
-      </div>
-    `
-    document.getElementById('souProf').onclick = () => navegar('cadastro-prof')
-    document.getElementById('souEmp').onclick = () => navegar('cadastro-emp')
-    document.getElementById('btnVoltarSplash').onclick = () => render(container)
-  }
+  document.getElementById('btnPular').onclick = (e) => { e.preventDefault(); goTo(2) }
+  document.getElementById('btnCadastrar').onclick = () => renderEscolhaPerfil(container)
+  document.getElementById('btnEntrar').onclick = (e) => { e.preventDefault(); navegar('login') }
+}
 
-  document.getElementById('btnEntrar').onclick = () => navegar('login')
+function renderEscolhaPerfil(container) {
+  container.innerHTML = `
+    <div style="
+      height:100%; background:#F4F5F7;
+      display:flex; flex-direction:column;
+      padding:48px 24px; font-family:'Inter', sans-serif;
+      justify-content:center;
+    ">
+      <h2 style="font-size:28px; font-weight:700; color:#111827; margin-bottom:40px; line-height:1.3;">
+        Como você quer usar o WorkWork?
+      </h2>
+
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <button id="btnSouProf" style="
+          background:#4F46E5; color:white; border:none;
+          padding:20px; border-radius:12px;
+          text-align:left; cursor:pointer; font-family:'Inter',sans-serif;
+          transition:transform 0.1s;
+        ">
+          <div style="font-weight:700; font-size:18px; margin-bottom:4px;">Sou profissional</div>
+          <div style="font-size:13px; font-weight:400; opacity:0.9;">quero oferecer meus serviços</div>
+        </button>
+
+        <button id="btnSouEmp" style="
+          background:transparent; color:#4F46E5;
+          border:1px solid #D1D5DB;
+          padding:20px; border-radius:12px;
+          text-align:left; cursor:pointer; font-family:'Inter',sans-serif;
+          transition:transform 0.1s;
+        ">
+          <div style="font-weight:700; font-size:18px; margin-bottom:4px; color:#111827;">Sou empresa</div>
+          <div style="font-size:13px; font-weight:400; color:#4B5563;">quero contratar profissionais</div>
+        </button>
+      </div>
+
+      <div style="position:absolute; bottom:40px; left:0; width:100%; text-align:center;">
+        <a href="#" id="btnJaTenho" style="color:#3730A3; font-size:14px; font-weight:600; text-decoration:none;">
+          já tenho conta — entrar
+        </a>
+      </div>
+    </div>
+  `
+  document.getElementById('btnSouProf').onclick = () => navegar('cadastro-prof')
+  document.getElementById('btnSouEmp').onclick  = () => navegar('cadastro-emp')
+  document.getElementById('btnJaTenho').onclick = (e) => { e.preventDefault(); navegar('login') }
 }
