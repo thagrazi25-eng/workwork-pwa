@@ -28,8 +28,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #E2E8F0; /* Fundo mais escuro para desktop */
-      /* Ocupa toda a área incluindo notch/safe-area no iOS */
+      background: #E2E8F0;
       padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);
       min-height: 100dvh;
@@ -37,6 +36,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    /* Modo fullscreen para telas admin no desktop */
+    body.admin-mode {
+      overflow: auto;
+      align-items: stretch;
+      background: #F8F9FD;
     }
 
     /* Loading inicial enquanto o JS carrega */
@@ -87,7 +93,7 @@
     }
 
     @media (min-width: 481px) {
-      #app:not(.admin-view) {
+      #app {
         max-width: 400px;
         height: 85vh;
         min-height: 700px;
@@ -96,12 +102,18 @@
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         overflow: hidden;
       }
-      #app.admin-view {
-        width: 100%;
-        height: 100dvh;
-        max-width: 100%;
-        border-radius: 0;
-      }
+    }
+
+    /* Admin: ocupa a tela toda no desktop */
+    body.admin-mode #app {
+      max-width: 100%;
+      width: 100%;
+      height: 100dvh;
+      min-height: 100dvh;
+      max-height: none;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: auto;
     }
 
     /* --- Niche & Subcategory Components --- */
@@ -218,7 +230,7 @@
     #toast.success { background: #059669; }
     #toast.error   { background: #DC2626; }
   </style>
-  <script type="module" crossorigin src="/workwork-pwa/assets/index-yvVyeKFo.js"></script>
+  <script type="module" crossorigin src="/workwork-pwa/assets/index-C3CtvK1P.js"></script>
 <script id="vite-plugin-pwa:register-sw" src="/workwork-pwa/registerSW.js"></script></head>
 <body>
 

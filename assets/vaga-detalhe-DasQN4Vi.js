@@ -1,4 +1,4 @@
-import{n as t}from"./index-yvVyeKFo.js";function i(e,n={}){e.innerHTML=`
+import{n as t}from"./index-C3CtvK1P.js";function i(e,n={}){e.innerHTML=`
     <div style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;gap:16px;background:#F4F5F7;">
       <div style="font-size:48px;">📋</div>
       <h2 style="font-family:'Sora',sans-serif;font-size:22px;color:#111827;">Detalhe da Vaga</h2>
