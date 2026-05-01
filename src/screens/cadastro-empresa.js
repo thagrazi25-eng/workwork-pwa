@@ -415,7 +415,7 @@ async function finalizarCadastro(container, pular) {
     navegar('splash', { aguardandoAprovacao: true })
   } catch (e) {
     console.error('ERRO CADASTRO EMPRESA:', e)
-    toast(e.message?.includes('already') ? 'E-mail já cadastrado' : 'Erro ao cadastrar empresa.', 'error')
+    toast(e.message || 'Erro ao criar conta. Veja o console.', 'error')
     btn.textContent = etapa === 4 ? 'Salvar e Finalizar' : 'Continuar'
     btn.disabled = false
   }

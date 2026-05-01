@@ -417,7 +417,7 @@ function renderEtapa(container) {
         navegar('splash', { aguardandoAprovacao: true })
       } catch (e) {
         console.error('ERRO CADASTRO PROFISSIONAL:', e)
-        toast(e.message?.includes('already') ? 'E-mail já cadastrado' : 'Erro ao criar conta. Veja o console.', 'error')
+        toast(e.message || 'Erro ao criar conta. Veja o console.', 'error')
         btn.textContent = 'Enviar e Criar Conta'
         btn.disabled = false
       }
