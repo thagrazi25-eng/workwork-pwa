@@ -28,12 +28,15 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #F4F5F7;
+      background: #E2E8F0; /* Fundo mais escuro para desktop */
       /* Ocupa toda a área incluindo notch/safe-area no iOS */
       padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);
       min-height: 100dvh;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Loading inicial enquanto o JS carrega */
@@ -80,6 +83,19 @@
       height: 100dvh;
       position: relative;
       overflow: hidden;
+      background: #F4F5F7;
+    }
+
+    @media (min-width: 481px) {
+      #app {
+        max-width: 400px;
+        height: 85vh;
+        min-height: 700px;
+        max-height: 900px;
+        border-radius: 32px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+      }
     }
 
     /* --- Niche & Subcategory Components --- */

@@ -88,6 +88,31 @@ function renderEtapa(container) {
         }
       }
     }
+
+    // Busca de CNPJ Automática
+    const inpCnpj = document.getElementById('cnpj')
+    const inpRazao = document.getElementById('razao_social')
+    if (inpCnpj && inpRazao) {
+      inpCnpj.addEventListener('blur', async (e) => {
+        const val = e.target.value.replace(/\D/g, '')
+        if (val.length === 14) {
+          try {
+            inpRazao.value = 'Buscando...'
+            const res = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${val}`)
+            if (res.ok) {
+              const data = await res.json()
+              inpRazao.value = data.razao_social || data.nome_fantasia || ''
+            } else {
+              inpRazao.value = ''
+              toast('CNPJ não encontrado ou inválido', 'error')
+            }
+          } catch (err) {
+            inpRazao.value = ''
+            console.error('Erro na BrasilAPI', err)
+          }
+        }
+      })
+    }
   } else if (etapa === 2) {
     content.innerHTML = `
       <h2 style="font-size:24px; font-weight:800; color:#111827; margin-bottom:6px;">Documentação (KYC)</h2>
@@ -238,7 +263,8 @@ function renderEtapa(container) {
 
         navegar('splash', { aguardandoAprovacao: true })
       } catch (e) {
-        toast(e.message?.includes('already') ? 'E-mail já cadastrado' : 'Erro ao cadastrar empresa', 'error')
+        console.error('ERRO CADASTRO EMPRESA:', e)
+        toast(e.message?.includes('already') ? 'E-mail já cadastrado' : 'Erro ao cadastrar empresa. Veja o console.', 'error')
         btn.textContent = 'Finalizar Cadastro'
         btn.disabled = false
       }
