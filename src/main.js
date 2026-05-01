@@ -66,11 +66,25 @@ export async function navegar(nomeTela, params = {}) {
 
 // ------- Auth Guard -------
 async function inicializar() {
-  // Aguarda sessão do Supabase
-  const { data: { session } } = await supabase.auth.getSession()
+  const loading = document.getElementById('app-loading')
+
+  // Aguarda sessão do Supabase com timeout de 5 segundos
+  let session = null
+  try {
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('timeout')), 5000)
+    )
+    const authResult = supabase.auth.getSession()
+    const { data } = await Promise.race([authResult, timeout])
+    session = data?.session ?? null
+  } catch (err) {
+    console.warn('Supabase não respondeu (verifique o .env):', err.message)
+    loading.classList.add('hide')
+    await navegar('splash')
+    return
+  }
 
   // Esconde o loading
-  const loading = document.getElementById('app-loading')
 
   if (!session) {
     // Sem sessão → tela de splash/onboarding
