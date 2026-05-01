@@ -1,4 +1,4 @@
-import{n as s,s as i,t as l}from"./index-DEW-c385.js";async function c(e){e.innerHTML=`
+import{n as s,s as i,t as l}from"./index-BMRtjzvn.js";async function c(e){e.innerHTML=`
     <div style="height:100dvh; display:flex; background:#F8F9FD; font-family:'Inter', sans-serif; color:#1E293B;">
       
       <!-- Sidebar -->

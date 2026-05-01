@@ -1,4 +1,4 @@
-import{_ as x,n as o}from"./index-DEW-c385.js";function u(e,i={}){if(i.aguardandoAprovacao){e.innerHTML=`
+import{_ as x,n as o}from"./index-BMRtjzvn.js";function u(e,i={}){if(i.aguardandoAprovacao){e.innerHTML=`
       <div style="
         display:flex; flex-direction:column; align-items:center;
         justify-content:center; height:100%; padding:40px;
@@ -18,7 +18,7 @@ import{_ as x,n as o}from"./index-DEW-c385.js";function u(e,i={}){if(i.aguardand
           color:#64748B; cursor:pointer;
         ">Sair da conta</button>
       </div>
-    `,document.getElementById("btnSair").onclick=async()=>{const{supabase:t}=await x(async()=>{const{supabase:s}=await import("./index-DEW-c385.js").then(a=>a.i);return{supabase:s}},[]);await t.auth.signOut(),o("login")};return}if(i.escolhaPerfil){c(e);return}e.innerHTML=`
+    `,document.getElementById("btnSair").onclick=async()=>{const{supabase:t}=await x(async()=>{const{supabase:s}=await import("./index-BMRtjzvn.js").then(a=>a.i);return{supabase:s}},[]);await t.auth.signOut(),o("login")};return}if(i.escolhaPerfil){c(e);return}e.innerHTML=`
     <div style="
       width:100%; height:100%;
       background:#F4F5F7;
