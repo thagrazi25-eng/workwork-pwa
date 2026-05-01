@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>WorkWork</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#4F46E5" />
+
+  <!-- iOS PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="WorkWork" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%234F46E5'/><text x='50%25' y='55%25' font-size='80' font-weight='800' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='system-ui'>WW</text></svg>" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%234F46E5'/><text x='50%25' y='55%25' font-size='80' font-weight='800' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='system-ui'>WW</text></svg>" />
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F4F5F7;
+      /* Ocupa toda a área incluindo notch/safe-area no iOS */
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      min-height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* Loading inicial enquanto o JS carrega */
+    #app-loading {
+      position: fixed;
+      inset: 0;
+      background: #4F46E5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 9999;
+      transition: opacity 0.4s ease;
+    }
+
+    #app-loading.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #app-loading .logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    #app-loading .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Container onde o router injeta as telas */
+    #app {
+      width: 100%;
+      height: 100dvh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* --- Niche & Subcategory Components --- */
+    .niche-card {
+      background: white;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 16px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .niche-card.selected {
+      border-color: #4F46E5;
+      background: #F5F3FF;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.08);
+    }
+    .niche-header {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+    }
+    .niche-icon { font-size: 24px; }
+    .niche-label { flex: 1; }
+    .niche-name { font-weight: 700; font-size: 16px; color: #111827; }
+    .niche-card.selected .niche-name { color: #4F46E5; }
+
+    .specs-panel {
+      padding: 0 16px 16px;
+      border-top: 1px solid rgba(79, 70, 229, 0.1);
+      padding-top: 16px;
+      animation: slideDown 0.3s ease-out;
+    }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .spec-group-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .spec-options { display: flex; flex-wrap: wrap; gap: 8px; }
+    .spec-chip {
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1.5px solid #E5E7EB;
+      background: white;
+      color: #4B5563;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .spec-chip:hover { border-color: #4F46E5; color: #4F46E5; }
+    .spec-chip.active {
+      background: #4F46E5;
+      border-color: #4F46E5;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+    }
+
+    .radio-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #D1D5DB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .niche-card.selected .radio-circle {
+      border-color: #4F46E5;
+      background: #4F46E5;
+    }
+    .radio-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+      display: none;
+    }
+    .niche-card.selected .radio-dot { display: block; }
+
+    /* Toast global */
+    #toast {
+      position: fixed;
+      bottom: calc(80px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1E293B;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      z-index: 8888;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    #toast.success { background: #059669; }
+    #toast.error   { background: #DC2626; }
+  </style>
+</head>
+<body>
+
+  <!-- Splash de loading enquanto o JS inicializa -->
+  <div id="app-loading">
+    <div class="logo">WorkWork</div>
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Container principal da SPA -->
+  <div id="app"></div>
+
+  <!-- Toast global acessível de qualquer tela -->
+  <div id="toast"></div>
+
+  <!-- Entry point -->
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+</html>
