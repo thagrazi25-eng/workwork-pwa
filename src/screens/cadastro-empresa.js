@@ -25,7 +25,7 @@ export function render(container) {
 
 function renderEtapa(container) {
   container.innerHTML = `
-    <div style="min-height:100dvh; background:#F4F5F7; display:flex; flex-direction:column; padding:60px 32px 40px;">
+    <div style="height:100%; background:#F4F5F7; display:flex; flex-direction:column; padding:60px 32px 40px;">
       
       <button id="btnVoltar" style="background:none; border:none; cursor:pointer; color:#64748B; font-size:15px; font-weight:600; text-align:left; padding:0; margin-bottom:28px; width:fit-content;">
         ← Voltar

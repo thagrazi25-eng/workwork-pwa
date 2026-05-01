@@ -48,7 +48,7 @@ export function render(container) {
 
 function renderEtapa(container) {
   container.innerHTML = `
-    <div style="min-height:100dvh; background:#F4F5F7; display:flex; flex-direction:column; padding:60px 32px 40px;">
+    <div style="height:100%; background:#F4F5F7; display:flex; flex-direction:column; padding:60px 32px 40px;">
       
       <button id="btnVoltar" style="background:none; border:none; cursor:pointer; color:#64748B; font-size:15px; font-weight:600; text-align:left; padding:0; margin-bottom:28px; width:fit-content;">
         ← Voltar
@@ -94,7 +94,15 @@ function renderEtapa(container) {
         <input id="nome"     placeholder="Seu nome completo" value="${dados.nome}"     style="${inp()}" />
         <input id="email"    placeholder="E-mail"            value="${dados.email}"    type="email" style="${inp()}" />
         <input id="telefone" placeholder="Telefone (DDD + número)" value="${dados.telefone}" style="${inp()}" />
-        <textarea id="bio" placeholder="Fale um pouco sobre sua experiência... (Opcional)" style="${inp()} resize:none; height:100px;">${dados.bio || ''}</textarea>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <label style="font-size:13px; font-weight:600; color:#1E293B;">Sobre mim (Biografia)</label>
+            <button id="btnGerarIA" style="background:none; border:none; color:#4F46E5; font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:4px; padding:0;">
+              ✨ Gerar com IA
+            </button>
+          </div>
+          <textarea id="bio" placeholder="Fale um pouco sobre sua experiência... (Opcional)" style="${inp()} resize:none; height:100px;">${dados.bio || ''}</textarea>
+        </div>
         <input id="senha"    placeholder="Senha (mín. 6 caracteres)" type="password"     style="${inp()}" />
       </div>
     `
@@ -110,6 +118,22 @@ function renderEtapa(container) {
           dados.avatarPreview = URL.createObjectURL(file)
           btnFotoReg.innerHTML = `<img src="${dados.avatarPreview}" style="width:100%;height:100%;object-fit:cover;">`
         }
+      }
+    }
+
+    const btnGerarIA = document.getElementById('btnGerarIA')
+    if (btnGerarIA) {
+      btnGerarIA.onclick = () => {
+        const nome = document.getElementById('nome').value.trim() || 'Profissional'
+        const bioField = document.getElementById('bio')
+        
+        btnGerarIA.innerHTML = '⏳ Gerando...'
+        
+        // Simulação de chamada de IA (Placeholder)
+        setTimeout(() => {
+          bioField.value = `Olá! Meu nome é ${nome} e sou um profissional dedicado e detalhista, sempre focado em entregar o melhor resultado para meus clientes. Tenho experiência prática e busco sempre aprimorar minhas habilidades. Estou à disposição para ajudar no que for preciso!`
+          btnGerarIA.innerHTML = '✨ Gerar com IA'
+        }, 1200)
       }
     }
   } else if (etapa === 2) {
