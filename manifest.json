@@ -1,0 +1,23 @@
+{
+  "name": "WorkWork",
+  "short_name": "WorkWork",
+  "description": "Conectando quem faz a quem precisa",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F5F7",
+  "theme_color": "#4F46E5",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%234F46E5'/><text x='50%25' y='55%25' font-size='80' font-weight='800' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='system-ui'>WW</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%234F46E5'/><text x='50%25' y='55%25' font-size='220' font-weight='800' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='system-ui'>WW</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
