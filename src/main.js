@@ -17,18 +17,23 @@ export function toast(msg, tipo = 'default', duracao = 3000) {
 // ------- Router -------
 // Cada tela é um módulo que exporta: { render(container), onDestroy? }
 const rotas = {
-  splash:           () => import('./screens/splash.js'),
-  login:            () => import('./screens/login.js'),
-  'cadastro-prof':  () => import('./screens/cadastro-prof.js'),
-  'cadastro-emp':   () => import('./screens/cadastro-empresa.js'),
-  'home-prof':      () => import('./screens/home-prof.js'),
-  'home-emp':       () => import('./screens/home-empresa.js'),
-  'vaga-detalhe':   () => import('./screens/vaga-detalhe.js'),
-  chat:             () => import('./screens/chat.js'),
-  perfil:           () => import('./screens/perfil.js'),
-  'admin-dashboard': () => import('./screens/admin-dashboard.js'),
-  'admin-aprovacoes': () => import('./screens/admin-aprovacoes.js'),
-  'admin-config':     () => import('./screens/admin-config.js'),
+  splash:                 () => import('./screens/splash.js'),
+  login:                  () => import('./screens/login.js'),
+  'cadastro-prof':        () => import('./screens/cadastro-prof.js'),
+  'cadastro-emp':         () => import('./screens/cadastro-empresa.js'),
+  'home-prof':            () => import('./screens/home-prof.js'),
+  'home-emp':             () => import('./screens/home-empresa.js'),
+  'vaga-detalhe':         () => import('./screens/vaga-detalhe.js'),
+  chat:                   () => import('./screens/chat.js'),
+  perfil:                 () => import('./screens/perfil.js'),
+  'admin-dashboard':      () => import('./screens/admin-dashboard.js'),
+  'admin-aprovacoes':     () => import('./screens/admin-aprovacoes.js'),
+  'admin-config':         () => import('./screens/admin-config.js'),
+  'admin-profissionais':  () => import('./screens/admin-profissionais.js'),
+  'admin-empresas':       () => import('./screens/admin-empresas.js'),
+  'admin-vagas':          () => import('./screens/admin-vagas.js'),
+  'admin-logs':           () => import('./screens/admin-logs.js'),
+  'admin-relatorios':     () => import('./screens/admin-relatorios.js'),
 }
 
 let telaAtual = null
