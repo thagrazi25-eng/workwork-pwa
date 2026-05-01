@@ -1,4 +1,4 @@
-import{n as r,h as l,u as c,t as s,_ as x}from"./index-C3CtvK1P.js";async function m(t){t.innerHTML=`
+import{n as r,h as l,u as c,t as s,_ as x}from"./index-C2s5YXJs.js";async function m(t){t.innerHTML=`
     <div style="height:100dvh; display:flex; flex-direction:column; background:#F4F5F7;">
       <div id="perfilContent" style="flex:1; overflow-y:auto; padding-bottom: 80px;">
         <div style="text-align:center; padding:60px; color:#94A3B8;">Carregando...</div>
@@ -125,7 +125,7 @@ import{n as r,h as l,u as c,t as s,_ as x}from"./index-C3CtvK1P.js";async functi
           <button id="btnSair" style="background:none; border:none; color: #EF4444; font-weight: 600; font-size: 15px; cursor: pointer; display:block; width:100%; padding:16px;">Sair da conta</button>
        </div>
     </div>
-  `,document.getElementById("btnSair").onclick=p}function u(){const t=document.getElementById("btnTrocarAvatar"),o=document.getElementById("inputAvatar");t&&o&&(t.onclick=()=>o.click(),o.onchange=async i=>{const e=i.target.files[0];if(e)try{t.innerHTML="⏳";const n=await c(e);document.getElementById("avatarCircle").innerHTML=`<img src="${n}?t=${Date.now()}" style="width:100%;height:100%;object-fit:cover;" />`,t.innerHTML="📷",s("Foto atualizada!","success")}catch{t.innerHTML="📷",s("Erro ao enviar foto","error")}})}async function p(){const{supabase:t}=await x(async()=>{const{supabase:o}=await import("./index-C3CtvK1P.js").then(i=>i.i);return{supabase:o}},[]);await t.auth.signOut(),r("login")}const a=t=>`
+  `,document.getElementById("btnSair").onclick=p}function u(){const t=document.getElementById("btnTrocarAvatar"),o=document.getElementById("inputAvatar");t&&o&&(t.onclick=()=>o.click(),o.onchange=async i=>{const e=i.target.files[0];if(e)try{t.innerHTML="⏳";const n=await c(e);document.getElementById("avatarCircle").innerHTML=`<img src="${n}?t=${Date.now()}" style="width:100%;height:100%;object-fit:cover;" />`,t.innerHTML="📷",s("Foto atualizada!","success")}catch{t.innerHTML="📷",s("Erro ao enviar foto","error")}})}async function p(){const{supabase:t}=await x(async()=>{const{supabase:o}=await import("./index-C2s5YXJs.js").then(i=>i.i);return{supabase:o}},[]);await t.auth.signOut(),r("login")}const a=t=>`
   display:flex; flex-direction:column; align-items:center; gap:3px;
   background:none; border:none; cursor:pointer; padding:8px 16px;
   color:${t?"#4F46E5":"#9CA3AF"}; font-family:'Inter',sans-serif;
