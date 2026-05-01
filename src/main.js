@@ -35,6 +35,10 @@ let telaAtual = null
 
 export async function navegar(nomeTela, params = {}) {
   const container = document.getElementById('app')
+  const isAdmin = nomeTela.startsWith('admin')
+
+  // Ativa/desativa modo admin no body
+  document.body.classList.toggle('admin-mode', isAdmin)
 
   // Destroi tela anterior se houver cleanup
   if (telaAtual?.onDestroy) telaAtual.onDestroy()
@@ -45,12 +49,6 @@ export async function navegar(nomeTela, params = {}) {
   container.style.transition = 'all 0.15s ease'
 
   await new Promise(r => setTimeout(r, 150))
-  
-  if (nomeTela.startsWith('admin-')) {
-    container.classList.add('admin-view')
-  } else {
-    container.classList.remove('admin-view')
-  }
 
   // Carrega novo módulo
   const loader = rotas[nomeTela]
